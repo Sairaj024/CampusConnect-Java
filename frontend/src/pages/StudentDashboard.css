@@ -1,0 +1,2051 @@
+/* =========================================================
+   CAMPUSCONNECT — STUDENT DASHBOARD
+   Responsive layout for desktop, tablet and minimized browser
+   ========================================================= */
+
+:root {
+    --student-primary: #5146e5;
+    --student-primary-dark: #4038c9;
+    --student-sidebar: #171936;
+    --student-sidebar-light: #242750;
+    --student-background: #f6f7fb;
+    --student-card: #ffffff;
+    --student-text: #182033;
+    --student-muted: #737b8c;
+    --student-border: #e6e8ef;
+    --student-shadow: 0 8px 30px rgba(20, 25, 45, 0.06);
+}
+
+.student-layout,
+.student-layout * {
+    box-sizing: border-box;
+}
+
+.student-layout {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--student-background);
+    color: var(--student-text);
+    display: flex;
+    overflow-x: hidden;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.student-loading {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--student-background);
+    color: var(--student-muted);
+}
+
+.loading-spinner {
+    width: 34px;
+    height: 34px;
+    border: 3px solid #e3e5ef;
+    border-top-color: var(--student-primary);
+    border-radius: 50%;
+    animation: student-spin 0.8s linear infinite;
+}
+
+@keyframes student-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.student-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+
+    width: 260px;
+    min-height: 100vh;
+
+    background: var(--student-sidebar);
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 26px 18px;
+
+    overflow: hidden;
+}
+
+.student-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 4px 10px 32px;
+    min-width: 0;
+}
+
+.student-brand-logo {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--student-primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.student-brand > div:last-child {
+    min-width: 0;
+}
+
+.student-brand strong {
+    display: block;
+    font-size: 17px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+}
+
+.student-brand span {
+    display: block;
+    margin-top: 3px;
+    color: #9da3c5;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.student-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.student-nav a {
+    width: 100%;
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    color: #aeb3d1;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.student-nav a:hover {
+    background: var(--student-sidebar-light);
+    color: #ffffff;
+}
+
+.student-nav a.active {
+    background: var(--student-primary);
+    color: #ffffff;
+}
+
+.student-nav a > span {
+    width: 20px;
+    flex: 0 0 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.student-sidebar-bottom {
+    margin-top: auto;
+    min-width: 0;
+}
+
+.student-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-width: 0;
+
+    padding: 16px 8px;
+
+    border-top: 1px solid #303354;
+}
+
+.student-avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    border-radius: 50%;
+    background: #7169f4;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.student-user > div:last-child {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.student-user strong {
+    color: #ffffff;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-user span {
+    margin-top: 3px;
+    color: #9298b8;
+    font-size: 11px;
+}
+
+.logout-button {
+    width: 100%;
+
+    border: 1px solid #35395b;
+    background: transparent;
+    color: #c7cae0;
+
+    padding: 10px;
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.logout-button:hover {
+    background: #25294b;
+    color: #ffffff;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.student-main {
+    width: calc(100% - 260px);
+    min-width: 0;
+
+    margin-left: 260px;
+
+    padding: 42px 48px;
+
+    background: var(--student-background);
+}
+
+.student-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+
+    margin-bottom: 34px;
+}
+
+.student-header > div {
+    min-width: 0;
+}
+
+.student-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+
+    color: var(--student-primary);
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.student-header h1 {
+    margin: 0;
+
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+}
+
+.student-header p {
+    margin: 8px 0 0;
+
+    color: var(--student-muted);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.refresh-button {
+    flex: 0 0 auto;
+
+    border: 1px solid var(--student-border);
+    background: #ffffff;
+    color: var(--student-text);
+
+    padding: 10px 15px;
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 650;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.refresh-button:hover {
+    border-color: #c9cce0;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.dashboard-error {
+    margin-bottom: 22px;
+    padding: 13px 16px;
+
+    border: 1px solid #f2c8c8;
+    background: #fff4f4;
+    border-radius: 10px;
+
+    color: #a83232;
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.stats-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    min-width: 0;
+    min-height: 158px;
+
+    background: var(--student-card);
+    border: 1px solid var(--student-border);
+    border-radius: 14px;
+
+    padding: 21px;
+
+    box-shadow: var(--student-shadow);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
+.stat-card > div:first-child > span {
+    display: block;
+
+    color: var(--student-muted);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat-card strong {
+    display: block;
+
+    margin-top: 16px;
+
+    color: var(--student-text);
+
+    font-size: 31px;
+    line-height: 1;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.stat-card small {
+    display: block;
+
+    margin-top: 9px;
+
+    color: #9298a7;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.stat-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    margin-top: 12px;
+}
+
+.stat-icon.purple {
+    background: #eeedff;
+    color: var(--student-primary);
+}
+
+.stat-icon.green {
+    background: #eaf7f2;
+    color: #16845b;
+}
+
+.stat-icon.blue {
+    background: #e9f3ff;
+    color: #3478bf;
+}
+
+.stat-icon.orange {
+    background: #fff2df;
+    color: #c47a12;
+}
+
+/* =========================================================
+   SECTION HEADERS
+   ========================================================= */
+
+.dashboard-section {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 32px;
+}
+
+.section-heading {
+    margin-bottom: 14px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.4px;
+}
+
+.section-heading p {
+    margin: 5px 0 0;
+
+    color: var(--student-muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   COMPANY CARDS
+   ========================================================= */
+/* =========================================================
+   COMPANY / PLACEMENT OPPORTUNITY CARDS
+   ========================================================= */
+
+.company-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   CARD
+   --------------------------------------------------------- */
+
+.company-card {
+    min-width: 0;
+
+    background: #ffffff;
+    border: 1px solid #e2e5ee;
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 6px 24px rgba(20, 25, 45, 0.05);
+
+    display: flex;
+    flex-direction: column;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.company-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d8daf0;
+
+    box-shadow:
+        0 12px 30px rgba(20, 25, 45, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   TOP ROW
+   --------------------------------------------------------- */
+
+.company-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   COMPANY LOGO
+   --------------------------------------------------------- */
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+
+    border-radius: 13px;
+
+    background: #eeedff;
+    color: var(--student-primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    border: 1px solid #e2e0ff;
+}
+
+
+/* ---------------------------------------------------------
+   ROLE BADGE
+   --------------------------------------------------------- */
+
+.company-role {
+    max-width: 55%;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    background: #f3f4f9;
+    color: #626b80;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    border: 1px solid #e8e9f0;
+}
+
+
+/* ---------------------------------------------------------
+   COMPANY NAME
+   --------------------------------------------------------- */
+
+.company-card h3 {
+    margin: 20px 0 0;
+
+    color: var(--student-text);
+
+    font-size: 22px;
+    line-height: 1.25;
+
+    font-weight: 750;
+
+    letter-spacing: -0.4px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ---------------------------------------------------------
+   COMPANY DETAILS
+   --------------------------------------------------------- */
+
+.company-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 10px 18px;
+
+    margin-top: 15px;
+
+    color: #667085;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    font-weight: 550;
+}
+
+
+/* Individual detail */
+
+.company-details span {
+    display: inline-flex;
+    align-items: center;
+
+    min-width: 0;
+
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+
+    white-space: normal;
+}
+
+
+/* Make the first detail / package slightly stronger */
+
+.company-details span:first-child {
+    color: #4b5568;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   APPLY BUTTON
+   --------------------------------------------------------- */
+
+.apply-button,
+.applied-button {
+    width: 100%;
+
+    margin-top: 22px;
+
+    min-height: 42px;
+
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+/* Available */
+
+.apply-button {
+    border: 1px solid var(--student-primary);
+
+    background: var(--student-primary);
+    color: #ffffff;
+}
+
+.apply-button:hover {
+    background: var(--student-primary-dark);
+
+    transform: translateY(-1px);
+}
+
+
+/* Already applied */
+
+.applied-button {
+    border: 1px solid #cce8d9;
+
+    background: #edf9f3;
+
+    color: #16845b;
+
+    cursor: default;
+}
+
+
+/* ---------------------------------------------------------
+   COMPANY CARD RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 800px) {
+
+    .company-grid {
+        gap: 16px;
+    }
+
+    .company-card {
+        padding: 20px;
+    }
+
+    .company-card h3 {
+        font-size: 20px;
+    }
+
+    .company-details {
+        font-size: 14px;
+        gap: 9px 14px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .company-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .company-card {
+        padding: 19px;
+        border-radius: 14px;
+    }
+
+    .company-logo {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+
+        font-size: 18px;
+    }
+
+    .company-card h3 {
+        margin-top: 18px;
+
+        font-size: 20px;
+    }
+
+    .company-details {
+        margin-top: 13px;
+
+        font-size: 14px;
+
+        gap: 8px 12px;
+    }
+
+    .company-role {
+        max-width: 60%;
+
+        font-size: 11px;
+
+        padding: 6px 9px;
+    }
+
+    .apply-button,
+    .applied-button {
+        margin-top: 18px;
+
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .company-card {
+        padding: 16px;
+    }
+
+    .company-card h3 {
+        font-size: 19px;
+    }
+
+    .company-details {
+        font-size: 13px;
+
+        gap: 7px 10px;
+    }
+
+    .company-role {
+        max-width: 58%;
+    }
+
+}
+
+
+/* =========================================================
+   APPLICATIONS TABLE
+   ========================================================= */
+
+.applications-card {
+    width: 100%;
+    min-width: 0;
+
+    background: #ffffff;
+    border: 1px solid var(--student-border);
+    border-radius: 14px;
+
+    box-shadow: var(--student-shadow);
+
+    overflow: hidden;
+}
+
+.application-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.application-table {
+    width: 100%;
+    min-width: 700px;
+
+    border-collapse: collapse;
+}
+
+.application-table th {
+    background: #fafbfc;
+    color: #858c9c;
+
+    text-align: left;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--student-border);
+
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.application-table td {
+    padding: 16px 18px;
+
+    border-bottom: 1px solid var(--student-border);
+
+    color: #50586b;
+
+    font-size: 13px;
+}
+
+.application-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.application-table tbody tr:hover {
+    background: #fafaff;
+}
+
+.application-table td strong {
+    color: var(--student-primary);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background: #eaf7f2;
+    color: #16845b;
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.withdraw-button {
+    border: 1px solid #efcccc;
+    background: #fff7f7;
+    color: #c33b3b;
+
+    padding: 7px 10px;
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.withdraw-button:hover {
+    background: #ffecec;
+}
+
+/* =========================================================
+   ANNOUNCEMENTS
+   ========================================================= */
+
+.announcement-grid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.announcement-card {
+    min-width: 0;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    padding: 20px;
+
+    background: #ffffff;
+    border: 1px solid var(--student-border);
+    border-radius: 14px;
+
+    box-shadow: var(--student-shadow);
+}
+
+.announcement-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    border-radius: 10px;
+
+    background: #e9f3ff;
+    color: #3478bf;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+.announcement-card > div:last-child {
+    min-width: 0;
+}
+
+.announcement-card h3 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 15px;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+.announcement-card p {
+    margin: 7px 0 0;
+
+    color: #646c7c;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.profile-card {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+
+    padding: 28px;
+
+    background: #ffffff;
+    border: 1px solid var(--student-border);
+    border-radius: 16px;
+
+    box-shadow: var(--student-shadow);
+}
+
+.profile-card > .profile-avatar {
+    width: 86px;
+    height: 86px;
+    flex: 0 0 86px;
+
+    border-radius: 50%;
+
+    background: #5746e8;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.profile-card > .profile-info {
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 44px;
+}
+
+.profile-card > .profile-info > div {
+    min-width: 0;
+}
+
+.profile-card > .profile-info span {
+    display: block;
+
+    color: #6d63e8;
+
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.profile-card > .profile-info strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #172036;
+
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   EMPTY STATES
+   ========================================================= */
+
+.empty-state {
+    min-height: 180px;
+
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid var(--student-border);
+    border-radius: 14px;
+
+    color: var(--student-muted);
+}
+
+.empty-state h3 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 15px;
+}
+
+.empty-state p {
+    margin: 7px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   TABLET / MINIMIZED DESKTOP
+   IMPORTANT:
+   At narrow widths the sidebar becomes icon-only.
+   Text nodes inside <a> are hidden with font-size: 0,
+   while the icon span gets its own font-size.
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .student-sidebar {
+        width: 76px;
+        padding: 20px 10px;
+    }
+
+    .student-brand {
+        justify-content: center;
+        padding: 4px 0 28px;
+    }
+
+    .student-brand > div:last-child {
+        display: none;
+    }
+
+    .student-nav a {
+        justify-content: center;
+        gap: 0;
+
+        padding: 13px 8px;
+
+        font-size: 0;
+    }
+
+    .student-nav a > span {
+        width: 22px;
+        flex: 0 0 22px;
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .student-sidebar-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .student-user {
+        justify-content: center;
+        padding: 16px 0;
+    }
+
+    .student-user > div:last-child,
+    .student-sidebar .logout-button {
+        display: none;
+    }
+
+    .student-main {
+        width: calc(100% - 76px);
+        margin-left: 76px;
+        padding: 34px 30px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .company-grid,
+    .announcement-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+    .student-main {
+        padding: 28px 22px;
+    }
+
+    .student-header {
+        gap: 18px;
+    }
+
+    .student-header h1 {
+        font-size: 30px;
+    }
+
+    .stats-grid {
+        gap: 14px;
+    }
+
+    .stat-card {
+        min-height: 150px;
+        padding: 18px;
+    }
+
+    .company-grid,
+    .announcement-grid {
+        gap: 14px;
+    }
+}
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .student-sidebar {
+        width: 64px;
+        padding: 16px 8px;
+    }
+
+    .student-brand {
+        padding-bottom: 22px;
+    }
+
+    .student-brand-logo {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .student-main {
+        width: calc(100% - 64px);
+        margin-left: 64px;
+        padding: 22px 14px;
+    }
+
+    .student-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+
+        margin-bottom: 26px;
+    }
+
+    .student-header h1 {
+        font-size: 28px;
+    }
+
+    .student-header p {
+        font-size: 13px;
+    }
+
+    .refresh-button {
+        align-self: flex-start;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        min-height: 142px;
+    }
+
+    .company-grid,
+    .announcement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .profile-card > .profile-avatar {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+        font-size: 28px;
+    }
+
+    .profile-card > .profile-info {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+    .student-sidebar {
+        width: 58px;
+    }
+
+    .student-main {
+        width: calc(100% - 58px);
+        margin-left: 58px;
+        padding: 20px 11px;
+    }
+
+    .student-nav a {
+        min-height: 44px;
+    }
+
+    .student-header h1 {
+        font-size: 25px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .company-card,
+    .announcement-card,
+    .profile-card {
+        padding: 17px;
+    }
+}
+
+/* =========================================================
+   EDIT PROFILE
+   ========================================================= */
+
+.profile-section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+
+.edit-profile-button {
+    flex-shrink: 0;
+    border: 1px solid #e1e4ef;
+    background: #ffffff;
+    color: #4f46e5;
+    border-radius: 10px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.edit-profile-button:hover {
+    background: #4f46e5;
+    color: #ffffff;
+    border-color: #4f46e5;
+    transform: translateY(-1px);
+}
+
+
+.profile-success-message,
+.profile-error-message {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.profile-success-message {
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    color: #15803d;
+}
+
+
+.profile-error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+
+/* EDIT CARD */
+
+.profile-edit-card {
+    padding: 28px;
+}
+
+
+.profile-edit-header {
+    margin-bottom: 28px;
+}
+
+
+.profile-edit-header h3 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: #172033;
+}
+
+
+.profile-edit-header p {
+    margin: 0;
+    color: #7b8499;
+    font-size: 14px;
+}
+
+
+.profile-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+
+.profile-edit-field {
+    min-width: 0;
+}
+
+
+.profile-edit-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.profile-edit-field input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    border: 1px solid #dfe3ec;
+    background: #ffffff;
+    color: #172033;
+
+    border-radius: 10px;
+    padding: 13px 14px;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.profile-edit-field input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+
+.profile-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+
+.profile-cancel-button,
+.profile-save-button {
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.profile-cancel-button {
+    background: #ffffff;
+    color: #374151;
+    border: 1px solid #dfe3ec;
+}
+
+
+.profile-cancel-button:hover:not(:disabled) {
+    background: #f8f9fc;
+}
+
+
+.profile-save-button {
+    background: #4f46e5;
+    color: #ffffff;
+    border: 1px solid #4f46e5;
+}
+
+
+.profile-save-button:hover:not(:disabled) {
+    background: #4338ca;
+    border-color: #4338ca;
+}
+
+
+.profile-cancel-button:disabled,
+.profile-save-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PROFILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .profile-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-section-heading {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+
+    .edit-profile-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .profile-edit-card {
+        padding: 20px;
+    }
+
+
+    .profile-edit-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+
+    .profile-cancel-button,
+    .profile-save-button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   CAMPUSCONNECT — FINAL STUDENT DASHBOARD POLISH
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   SECTION SPACING
+   --------------------------------------------------------- */
+
+.dashboard-section {
+    margin-bottom: 38px;
+}
+
+.section-heading {
+    margin-bottom: 17px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.section-heading p {
+    color: #7a8293;
+}
+
+
+/* ---------------------------------------------------------
+   COMPANY CARDS — POLISHED
+   --------------------------------------------------------- */
+
+.company-card {
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 5px 22px rgba(20, 25, 45, 0.045);
+}
+
+.company-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(20, 25, 45, 0.075);
+}
+
+.company-logo {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: 12px;
+
+    background: #f0efff;
+    border: 1px solid #e5e2ff;
+
+    font-size: 19px;
+}
+
+.company-role {
+    background: #f7f7fa;
+    color: #596174;
+    border: 1px solid #e8e9ef;
+
+    padding: 7px 10px;
+    border-radius: 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.company-card h3 {
+    margin-top: 18px;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.company-details {
+    margin-top: 14px;
+    gap: 9px 16px;
+
+    color: #687184;
+    font-size: 13px;
+}
+
+.company-details span:first-child {
+    color: #4d5669;
+    font-weight: 700;
+}
+
+.apply-button,
+.applied-button {
+    margin-top: 20px;
+    min-height: 43px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.apply-button {
+    box-shadow: 0 3px 8px rgba(81, 70, 229, 0.16);
+}
+
+.apply-button:hover {
+    box-shadow: 0 5px 12px rgba(81, 70, 229, 0.22);
+}
+
+.applied-button {
+    background: #f0faf5;
+    border-color: #cce8d9;
+    color: #16845b;
+}
+
+
+/* ---------------------------------------------------------
+   APPLICATION TABLE — POLISHED
+   --------------------------------------------------------- */
+
+.applications-card {
+    border-radius: 15px;
+    box-shadow: 0 5px 22px rgba(20, 25, 45, 0.045);
+}
+
+.application-table th {
+    padding: 13px 18px;
+
+    background: #fafbfc;
+
+    color: #8991a1;
+
+    font-size: 10px;
+    letter-spacing: 0.7px;
+}
+
+.application-table td {
+    padding: 17px 18px;
+    font-size: 13px;
+}
+
+.application-table td strong {
+    font-size: 13px;
+    font-weight: 750;
+}
+
+.application-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.application-table tbody tr:hover {
+    background: #fbfbff;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    background: #edf9f3;
+    border: 1px solid #d8f0e4;
+
+    color: #16845b;
+
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.withdraw-button {
+    padding: 7px 11px;
+    border-radius: 7px;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.withdraw-button:hover {
+    border-color: #e8bcbc;
+    background: #fff0f0;
+}
+
+
+/* ---------------------------------------------------------
+   ANNOUNCEMENTS — POLISHED
+   --------------------------------------------------------- */
+
+.announcement-grid {
+    gap: 16px;
+}
+
+.announcement-card {
+    position: relative;
+
+    padding: 19px 20px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 5px 20px rgba(20, 25, 45, 0.04);
+
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease;
+}
+
+.announcement-card:hover {
+    transform: translateY(-1px);
+
+    border-color: #dfe1ed;
+
+    box-shadow: 0 9px 25px rgba(20, 25, 45, 0.065);
+}
+
+.announcement-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+
+    border-radius: 11px;
+
+    background: #eef5ff;
+    color: #3478bf;
+
+    font-size: 12px;
+}
+
+.announcement-card h3 {
+    font-size: 15px;
+    font-weight: 750;
+    color: #1b2336;
+}
+
+.announcement-card p {
+    margin-top: 6px;
+
+    color: #697285;
+
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   PROFILE — FIX EMAIL WRAPPING
+   --------------------------------------------------------- */
+
+.profile-card {
+    min-width: 0;
+    overflow: hidden;
+
+    padding: 26px 28px;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 22px rgba(20, 25, 45, 0.045);
+}
+
+.profile-card > .profile-info {
+    min-width: 0;
+}
+
+.profile-card > .profile-info > div {
+    min-width: 0;
+}
+
+.profile-card > .profile-info strong {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.student-dashboard-profile-main,
+.student-dashboard-profile-details,
+.student-dashboard-profile-detail {
+    min-width: 0;
+}
+
+.student-dashboard-profile-details {
+    min-width: 0;
+}
+
+.student-dashboard-profile-detail {
+    min-width: 0;
+}
+
+.student-dashboard-profile-detail .value {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   EMPTY STATES
+   --------------------------------------------------------- */
+
+.empty-state {
+    min-height: 190px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 5px 20px rgba(20, 25, 45, 0.035);
+}
+
+.empty-state h3 {
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.empty-state p {
+    color: #7b8393;
+}
+
+
+/* ---------------------------------------------------------
+   STAT CARDS — SMALL POLISH
+   --------------------------------------------------------- */
+
+.stat-card {
+    border-radius: 15px;
+
+    box-shadow: 0 5px 22px rgba(20, 25, 45, 0.045);
+
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 9px 26px rgba(20, 25, 45, 0.065);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .dashboard-section {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .company-card {
+        padding: 19px;
+    }
+
+    .announcement-card {
+        padding: 17px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .application-table {
+        min-width: 650px;
+    }
+}
+
+.edit-profile-button {
+    border: 1px solid var(--student-primary);
+    background: #ffffff;
+    color: var(--student-primary);
+    padding: 10px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.edit-profile-button:hover {
+    background: #f3f2ff;
+}
+
+/* =========================================================
+   APPLICATION DEADLINE
+   ========================================================= */
+
+.application-deadline {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    margin-top: 17px;
+    padding: 11px 13px;
+
+    border: 1px solid #e5e7f0;
+    border-radius: 10px;
+
+    background: #fafaff;
+}
+
+.deadline-icon {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #eeedff;
+    color: var(--student-primary);
+
+    font-size: 13px;
+}
+
+.application-deadline > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.application-deadline strong {
+    color: var(--student-text);
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.application-deadline small {
+    color: var(--student-muted);
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.application-deadline.closed {
+    border-color: #f0cccc;
+    background: #fff7f7;
+}
+
+.application-deadline.closed .deadline-icon {
+    background: #ffe8e8;
+    color: #c33b3b;
+}
+
+.application-deadline.closed strong {
+    color: #b43434;
+}
+
+
+/* =========================================================
+   CLOSED APPLICATION BUTTON
+   ========================================================= */
+
+.closed-button {
+    width: 100%;
+    margin-top: 22px;
+
+    min-height: 42px;
+    padding: 11px 16px;
+
+    border-radius: 9px;
+    border: 1px solid #dedfe5;
+
+    background: #f1f2f5;
+    color: #9297a5;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 750;
+
+    cursor: not-allowed;
+}
