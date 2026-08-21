@@ -2,6 +2,8 @@ package com.campusconnect.campusconnect.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -42,10 +44,10 @@ public class Application {
      * Spring/Jackson to send the complete PDF as JSON
      * whenever an application is returned.
      */
-    @Lob
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
-    @Column(name = "resume_data", columnDefinition = "MEDIUMBLOB")
+    @JdbcTypeCode(SqlTypes.BINARY)
+    @Column(name = "resume_data", columnDefinition = "bytea")
     private byte[] resumeData;
 
     public Application() {
