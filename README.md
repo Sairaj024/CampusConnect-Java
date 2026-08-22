@@ -65,6 +65,12 @@ The system allows students to register, explore placement opportunities, apply t
 - Render
 - GitHub
 
+### 🌐 Live Demo
+
+👉 **[Open CampusConnect](https://campusconnect-frontend-u9p7.onrender.com)**
+
+The live application is deployed on Render and can be accessed directly from a browser.
+
 ---
 
 ## 🏗️ System Architecture
